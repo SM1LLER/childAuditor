@@ -11,19 +11,16 @@ export default class ChildAuditor extends LightningElement {
     }
 
     refreshClick(event){
-        window.console.log('Refreshing');
         this.updateChildsWithCount();
     }
 
     updateChildsWithCount(){
-        window.console.log('Updating');
         this.childWithCountStrings = [];
         getChildsToCountMap({
             recordId: this.recordId
         })
             .then(childToCountMap => {
                 refreshApex(childToCountMap);
-                window.console.log('Apex worked');
                 var conts = childToCountMap;
                 var num = 0;
                 for(var key in conts){
@@ -36,7 +33,6 @@ export default class ChildAuditor extends LightningElement {
                             var ending = 'records';
                         }
                         var childWithCount = num + '. ' + key + ' - ' + value + ' ' + ending;
-                        window.console.log('Adding: ' + childWithCount);
                         this.childWithCountStrings.push(childWithCount);
                     }
                 }

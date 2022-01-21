@@ -12,8 +12,12 @@ public with sharing class ChildAuditorController {
             if(fieldName != null && childRelDescribe.isAccessible() && childRelDescribe.isQueryable()){
                 String nameOfChild = childRelDescribe.getName();
             	String nameOfRefField = childRel.getField().getDescribe().getName();
-            	List<SObject> childRecords = Database.query('SELECT Id FROM ' + nameOfChild + ' WHERE ' + nameOfRefField + ' =:idToProccess');
-                childsToCountMap.put(fieldName, childRecords.size());
+                try{
+            	    List<SObject> childRecords = Database.query('SELECT Id FROM ' + nameOfChild + ' WHERE ' + nameOfRefField + ' =:idToProccess');
+                    childsToCountMap.put(fieldName, childRecords.size());
+                } catch (System.ExternalObjectException e){
+                    continue;
+                }
             }
         }
         return childsToCountMap;
