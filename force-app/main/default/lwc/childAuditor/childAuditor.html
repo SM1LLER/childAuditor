@@ -1,0 +1,12 @@
+<template>
+    <lightning-card title="Child Auditor">
+        <template if:true={childWithCountStrings}>
+            <template for:each={childWithCountStrings} for:item="childWithCountString">
+                <p class="slds-var-p-horizontal_small" key={childWithCountString}>{childWithCountString}</p>
+            </template>
+            <div slot="footer" class="slds-clearfix">
+                <lightning-button variant="brand" label="Refresh" onclick={refreshClick} class="slds-float_right"></lightning-button>
+            </div>
+        </template>
+    </lightning-card>
+</template>
